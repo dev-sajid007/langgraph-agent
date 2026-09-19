@@ -4,7 +4,7 @@ load_dotenv()
 
 from langchain_core.messages import HumanMessage
 
-from .agent import agent
+from .agent import agent, close
 
 
 def main():
@@ -14,27 +14,31 @@ def main():
         }
     }
 
-    first = agent.invoke(
-        {
-            "messages": [
-                HumanMessage(content="My name is Sajid.")
-            ]
-        },
-        config=config,
-    )
+    try:
+        first = agent.invoke(
+            {
+                "messages": [
+                    HumanMessage(content="My name is Sajid.")
+                ]
+            },
+            config=config,
+        )
 
-    print("First:", first["messages"][-1].content)
+        print("First:", first["messages"][-1].content)
 
-    second = agent.invoke(
-        {
-            "messages": [
-                HumanMessage(content="What is my name?")
-            ]
-        },
-        config=config,
-    )
+        second = agent.invoke(
+            {
+                "messages": [
+                    HumanMessage(content="What is my name?")
+                ]
+            },
+            config=config,
+        )
 
-    print("Second:", second["messages"][-1].content)
+        print("Second:", second["messages"][-1].content)
+
+    finally:
+        close()
 
 
 if __name__ == "__main__":
