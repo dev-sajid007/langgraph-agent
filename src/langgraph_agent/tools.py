@@ -1,3 +1,5 @@
+from typing import Any
+
 from langchain_core.tools import tool
 
 
@@ -23,8 +25,17 @@ def get_project_info() -> str:
     )
 
 
-def get_tools():
+def get_native_tools():
+    """Return native tools defined in this module."""
     return [
         calculator,
         get_project_info,
     ]
+
+
+def get_all_tools(mcp_tools: list[Any] | None = None) -> list[Any]:
+    """Return all tools: native + MCP tools."""
+    tools = get_native_tools()
+    if mcp_tools:
+        tools.extend(mcp_tools)
+    return tools

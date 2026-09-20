@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "math": {
+      "command": "python",
+      "args": ["examples/math_mcp_server.py"],
+      "transport": "stdio"
+    },
+    "remote-api": {
+      "url": "http://localhost:8000/mcp",
+      "transport": "http"
+    }
+  }
+}
